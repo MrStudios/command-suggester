@@ -1,4 +1,4 @@
-name: 'Suggester Build'
+name: 'Command Suggester Build'
 on:
   push:
     branches: [ 'ver/latest ']
