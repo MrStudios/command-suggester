@@ -1,0 +1,34 @@
+name: 'Bug Report'
+description: 'Select if you want to report plugin issue.'
+title: "[BUG] "
+labels: [ 'bug' ]
+body:
+  - type: 'input'
+    id: 'plugin-version'
+    attributes:
+      label: 'Plugin Version'
+      description: 'What version of our plugin are you using?'
+    validations:
+      required: true
+  - type: 'input'
+    id: 'software-version'
+    attributes:
+      label: 'Velocity Version'
+      description: 'Which Velocity version are you using?'
+    validations:
+      required: false
+  - type: 'textarea'
+    id: 'details'
+    attributes:
+      label: 'Issue Details'
+      description: 'Describe your problem providing as many as possible details.'
+    validations:
+      required: true
+  - type: 'checkboxes'
+    id: 'terms'
+    attributes:
+      label: 'Confirmation'
+      description: 'By submitting this issue, you agree to follow our Contributing & Issues rules.'
+      options:
+        - label: 'I agree to follow this project Contributing & Issues rules.'
+          required: true

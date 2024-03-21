@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <name>Command Suggester</name>
+    <description>A simple plugin to hide selected commands from players.</description>
+
+    <groupId>pl.mrstudios.suggester</groupId>
+    <artifactId>command-suggester</artifactId>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+                <configuration>
+                    <source>17</source>
+                    <target>17</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.5.0</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <relocations>
+                                <relocation>
+                                    <pattern>eu.okaeri.configs</pattern>
+                                    <shadedPattern>pl.mrstudios.suggester.libraries.okaeri-configs</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>dev.rollczi.litecommands</pattern>
+                                    <shadedPattern>pl.mrstudios.suggester.libraries.litecommands</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>panda.std</pattern>
+                                    <shadedPattern>pl.mrstudios.suggester.libraries.panda-std</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>org.yaml</pattern>
+                                    <shadedPattern>pl.mrstudios.suggester.libraries.snakeyaml</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>pl.mrstudios.commons.inject</pattern>
+                                    <shadedPattern>pl.mrstudios.suggester.libraries.commons-inject</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>pl.mrstudios.commons.reflection</pattern>
+                                    <shadedPattern>pl.mrstudios.suggester.libraries.commons-reflection</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>org.intellij.lang.annotations</pattern>
+                                    <shadedPattern>pl.mrstudios.suggester.libraries.intellij-annotations</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>org.jetbrains.annotations</pattern>
+                                    <shadedPattern>pl.mrstudios.suggester.libraries.jetbrains-annotations</shadedPattern>
+                                </relocation>
+                            </relocations>
+                            <createDependencyReducedPom>false</createDependencyReducedPom>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+    </build>
+
+    <repositories>
+        <repository>
+            <id>mrstudios-public</id>
+            <url>https://repo.mrstudios.pl/public/</url>
+        </repository>
+        <repository>
+            <id>papermc-repo</id>
+            <url>https://repo.papermc.io/repository/maven-public/</url>
+        </repository>
+        <repository>
+            <id>okaeri-repo</id>
+            <url>https://storehouse.okaeri.eu/repository/maven-public/</url>
+        </repository>
+        <repository>
+            <id>panda-repository</id>
+            <url>https://repo.panda-lang.org/releases/</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+
+        <!-- PLATFORM -->
+        <dependency>
+            <groupId>com.velocitypowered</groupId>
+            <artifactId>velocity-proxy</artifactId>
+            <version>${velocity.version}</version>
+            <scope>provided</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.velocitypowered</groupId>
+                    <artifactId>velocity-proxy-log4j2-plugin</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- CONFIG -->
+        <dependency>
+            <groupId>eu.okaeri</groupId>
+            <artifactId>okaeri-configs-yaml-snakeyaml</artifactId>
+            <version>${okaeri.configs.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.yaml</groupId>
+                    <artifactId>snakeyaml</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- SNAKEYAML -->
+        <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+            <version>2.2</version>
+        </dependency>
+
+        <!-- ANNOTATIONS -->
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>24.1.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- COMMONS -->
+        <dependency>
+            <groupId>pl.mrstudios.commons</groupId>
+            <artifactId>commons-inject</artifactId>
+            <version>${mrstudios.commons.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>pl.mrstudios.commons</groupId>
+            <artifactId>commons-reflection</artifactId>
+            <version>${mrstudios.commons.version}</version>
+        </dependency>
+
+        <!-- LITE COMMANDS -->
+        <dependency>
+            <groupId>dev.rollczi</groupId>
+            <artifactId>litecommands-core</artifactId>
+            <version>${rollczi.litecommands.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>dev.rollczi</groupId>
+            <artifactId>litecommands-velocity</artifactId>
+            <version>${rollczi.litecommands.version}</version>
+        </dependency>
+
+        <!-- VPACKETEVENTS -->
+        <dependency>
+            <groupId>io.github.4drian3d</groupId>
+            <artifactId>vpacketevents-api</artifactId>
+            <version>1.1.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+    </dependencies>
+
+    <properties>
+        <velocity.version>3.3.0-SNAPSHOT</velocity.version>
+        <mrstudios.commons.version>1.0.0</mrstudios.commons.version>
+        <okaeri.configs.version>5.0.0-beta.5</okaeri.configs.version>
+        <rollczi.litecommands.version>3.4.0</rollczi.litecommands.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <modelVersion>4.0.0</modelVersion>
+
+</project>
