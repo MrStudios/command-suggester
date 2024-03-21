@@ -1,7 +1,7 @@
 name: 'Command Suggester Build'
 on:
   push:
-    branches: [ 'ver/latest ']
+    branches: [ 'ver/latest' ]
   pull_request:
     branches: [ 'ver/latest' ]
 jobs:
